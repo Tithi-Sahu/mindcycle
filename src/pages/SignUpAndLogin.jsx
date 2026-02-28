@@ -90,21 +90,26 @@ const SignUpAndLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">MindCycle</h1>
-          <p className="mt-2 text-gray-600">
+    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-blue-500 to-cyan-400 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+      <div className="absolute -bottom-8 left-20 w-96 h-96 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+      
+      <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
+        <div className="text-center mb-8 animate-fade-in">
+          <h1 className="text-5xl font-bold text-white mb-2 drop-shadow-lg">MindCycle</h1>
+          <p className="mt-2 text-white/90 text-lg font-light">
             Your mental health and productivity companion
           </p>
         </div>
 
         <Card>
-          <CardHeader>
-            <CardTitle className="text-center">
+          <CardHeader className="bg-gradient-to-r from-purple-50 to-blue-50">
+            <CardTitle className="text-center text-2xl text-gray-900">
               {isLogin ? 'Welcome Back' : 'Create Account'}
             </CardTitle>
-            <CardDescription className="text-center">
+            <CardDescription className="text-center text-gray-600">
               {isLogin
                 ? 'Sign in to your account to continue'
                 : 'Join us to start your wellness journey'
@@ -224,7 +229,7 @@ const SignUpAndLogin = () => {
                 </div>
               )}
 
-              <Button type="submit" className="w-full" disabled={loading}>
+              <Button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg" disabled={loading}>
                 {loading ? 'Please wait...' : (isLogin ? 'Sign In' : 'Create Account')}
               </Button>
 
@@ -250,7 +255,7 @@ const SignUpAndLogin = () => {
                 <Button
                   type="button"
                   variant="outline"
-                  className="w-full"
+                  className="w-full hover:bg-purple-50 hover:border-purple-300 transition-all duration-300 transform hover:scale-105"
                   onClick={handleGuestLogin}
                   disabled={loading}
                 >
@@ -267,7 +272,7 @@ const SignUpAndLogin = () => {
               <button
                 type="button"
                 onClick={() => setIsLogin(!isLogin)}
-                className="text-sm text-blue-600 hover:text-blue-500"
+                className="text-sm text-purple-600 hover:text-purple-800 font-medium transition-colors duration-300"
               >
                 {isLogin
                   ? "Don't have an account? Sign up"

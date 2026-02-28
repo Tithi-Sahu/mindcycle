@@ -34,3 +34,22 @@ code {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+/* Animation delay utilities */
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Smooth transitions for interactive elements */
+button, a {
+  transition: all 0.3s ease;
+}
+
+/* Glass morphism effect for cards */
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+}

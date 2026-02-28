@@ -76,24 +76,29 @@ const Journal = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-green-900 via-teal-900 to-cyan-900 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-green-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+      <div className="absolute -bottom-8 left-20 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-4000"></div>
+      
       <Header />
       <PanicModeButton />
 
-      <main className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8">
+      <main className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
         <div className="px-4 py-6 sm:px-0">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">AI Journal</h1>
-            <p className="mt-2 text-gray-600">
+          <div className="mb-8 animate-fade-in">
+            <h1 className="text-4xl font-bold text-white">AI Journal</h1>
+            <p className="mt-2 text-white/70 text-lg">
               Write or speak your thoughts. Our AI will analyze your entries for insights.
             </p>
           </div>
 
           {/* New Entry */}
-          <Card className="mb-8">
-            <CardHeader>
-              <CardTitle>New Journal Entry</CardTitle>
-              <CardDescription>
+          <Card className="mb-8 bg-white/10 backdrop-blur-md border-white/20 hover:shadow-2xl transition-all duration-300">
+            <CardHeader className="bg-gradient-to-r from-green-500/20 to-cyan-500/20">
+              <CardTitle className="text-white">New Journal Entry</CardTitle>
+              <CardDescription className="text-white/70">
                 Share what's on your mind. Your privacy is protected.
               </CardDescription>
             </CardHeader>

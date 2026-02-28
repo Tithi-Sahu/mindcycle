@@ -74,20 +74,25 @@ const GoalsAndReminders = () => {
   const categories = ['General', 'Wellness', 'Learning', 'Fitness', 'Career', 'Relationships'];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-900 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+      <div className="absolute -bottom-8 left-20 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-4000"></div>
+      
       <Header />
       <PanicModeButton />
 
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
         <div className="px-4 py-6 sm:px-0">
-          <div className="flex justify-between items-center mb-8">
+          <div className="flex justify-between items-center mb-8 animate-fade-in">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Goals & Reminders</h1>
-              <p className="mt-2 text-gray-600">
+              <h1 className="text-4xl font-bold text-white">Goals & Reminders</h1>
+              <p className="mt-2 text-white/70 text-lg">
                 Set and track your personal goals and daily reminders.
               </p>
             </div>
-            <Button onClick={() => setShowAddForm(true)}>
+            <Button onClick={() => setShowAddForm(true)} className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white transition-all duration-300 transform hover:scale-105">
               <Plus className="mr-2 h-4 w-4" />
               Add Goal
             </Button>
@@ -95,9 +100,9 @@ const GoalsAndReminders = () => {
 
           {/* Add Goal Form */}
           {showAddForm && (
-            <Card className="mb-6">
-              <CardHeader>
-                <CardTitle>Add New Goal</CardTitle>
+            <Card className="mb-6 bg-white/10 backdrop-blur-md border-white/20">
+              <CardHeader className="bg-gradient-to-r from-indigo-500/20 to-purple-500/20">
+                <CardTitle className="text-white">Add New Goal</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>

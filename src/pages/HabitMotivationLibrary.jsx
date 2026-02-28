@@ -901,19 +901,24 @@ Start small, be consistent, and watch as gratitude becomes a natural part of how
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+      <div className="absolute -bottom-8 left-20 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-4000"></div>
+      
       <Header />
       <PanicModeButton />
 
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
         <div className="px-4 py-6 sm:px-0">
           {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Motivation Library</h1>
-            <p className="text-gray-600 text-lg">
+          <div className="mb-8 animate-fade-in">
+            <h1 className="text-4xl font-bold text-white mb-2">Motivation Library</h1>
+            <p className="text-white/70 text-lg">
               Discover resources to build healthy habits and maintain mental wellness.
             </p>
-            <div className="mt-4 flex items-center space-x-4 text-sm text-gray-500">
+            <div className="mt-4 flex items-center space-x-4 text-sm text-white/60">
               <span className="flex items-center">
                 <BookOpen className="h-4 w-4 mr-1" />
                 {resources.length} articles
@@ -928,13 +933,13 @@ Start small, be consistent, and watch as gratitude becomes a natural part of how
           {/* Search and Filters */}
           <div className="mb-6 space-y-4">
             <div className="relative">
-              <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Search className="absolute left-3 top-3 h-4 w-4 text-white/40" />
               <input
                 type="text"
                 placeholder="Search articles, guides, or topics..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
+                className="w-full pl-10 pr-4 py-3 border border-white/30 bg-white/10 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-white/50 backdrop-blur-sm focus:bg-white/15 transition-all duration-300"
               />
             </div>
 
@@ -961,12 +966,12 @@ Start small, be consistent, and watch as gratitude becomes a natural part of how
               const isBookmarked = bookmarkedResources.has(resource.id);
 
               return (
-                <Card key={resource.id} className="hover:shadow-xl transition-all duration-300 cursor-pointer group border-l-4 border-l-blue-500">
+                <Card key={resource.id} className="bg-white/10 backdrop-blur-md border-l-4 border-l-blue-500 hover:shadow-xl transition-all duration-300 cursor-pointer group hover:bg-white/15">
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex items-center space-x-2">
-                        <IconComponent className="h-5 w-5 text-blue-600" />
-                        <CardTitle className="text-lg group-hover:text-blue-600 transition-colors">
+                        <IconComponent className="h-5 w-5 text-blue-400" />
+                        <CardTitle className="text-lg text-white group-hover:text-blue-300 transition-colors">
                           {resource.title}
                         </CardTitle>
                       </div>
@@ -980,7 +985,7 @@ Start small, be consistent, and watch as gratitude becomes a natural part of how
                           }}
                           className="p-1 h-8 w-8"
                         >
-                          <Bookmark className={`h-4 w-4 ${isBookmarked ? 'fill-current text-yellow-500' : 'text-gray-400'}`} />
+                          <Bookmark className={`h-4 w-4 ${isBookmarked ? 'fill-current text-yellow-400' : 'text-white/40'}`} />
                         </Button>
                         <Button
                           variant="ghost"
@@ -988,13 +993,13 @@ Start small, be consistent, and watch as gratitude becomes a natural part of how
                           onClick={(e) => shareResource(resource)}
                           className="p-1 h-8 w-8"
                         >
-                          <Share2 className="h-4 w-4 text-gray-400" />
+                          <Share2 className="h-4 w-4 text-white/40" />
                         </Button>
                       </div>
                     </div>
 
-                    <div className="flex items-center space-x-3 text-sm text-gray-600 mb-2">
-                      <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">
+                    <div className="flex items-center space-x-3 text-sm text-white/70 mb-2">
+                      <span className="px-2 py-1 bg-blue-600/40 text-blue-200 rounded-full text-xs font-medium border border-blue-500/50">
                         {resource.category}
                       </span>
                       <span className="flex items-center">
@@ -1017,13 +1022,13 @@ Start small, be consistent, and watch as gratitude becomes a natural part of how
                   </CardHeader>
 
                   <CardContent>
-                    <CardDescription className="mb-4 text-gray-700 leading-relaxed">
+                    <CardDescription className="mb-4 text-white/80 leading-relaxed">
                       {resource.description}
                     </CardDescription>
 
                     <div className="flex flex-wrap gap-1 mb-4">
                       {resource.tags.slice(0, 3).map(tag => (
-                        <span key={tag} className="px-2 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">
+                        <span key={tag} className="px-2 py-1 bg-white/20 text-white/90 rounded-full text-xs border border-white/30">
                           #{tag}
                         </span>
                       ))}
@@ -1031,7 +1036,7 @@ Start small, be consistent, and watch as gratitude becomes a natural part of how
 
                     <Button
                       onClick={() => openReadingView(resource)}
-                      className="w-full group-hover:bg-blue-600 transition-colors"
+                      className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white transition-all duration-300 transform hover:scale-105"
                     >
                       Read Article
                     </Button>
@@ -1043,9 +1048,9 @@ Start small, be consistent, and watch as gratitude becomes a natural part of how
 
           {filteredResources.length === 0 && (
             <div className="text-center py-12">
-              <BookOpen className="mx-auto h-12 w-12 text-gray-400" />
-              <h3 className="mt-2 text-sm font-medium text-gray-900">No resources found</h3>
-              <p className="mt-1 text-sm text-gray-500">
+              <BookOpen className="mx-auto h-12 w-12 text-white/30" />
+              <h3 className="mt-2 text-sm font-medium text-white/90">No resources found</h3>
+              <p className="mt-1 text-sm text-white/60">
                 Try adjusting your search or filter criteria.
               </p>
             </div>
@@ -1055,22 +1060,22 @@ Start small, be consistent, and watch as gratitude becomes a natural part of how
 
       {/* Reading Modal */}
       {isReadingMode && selectedResource && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+        <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
+          <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-white/20">
             {/* Reading Header */}
-            <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex items-center justify-between">
+            <div className="sticky top-0 bg-white/10 backdrop-blur-md border-b border-white/20 p-6 flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={closeReadingView}
-                  className="p-2"
+                  className="p-2 text-white/80 hover:text-white hover:bg-white/20"
                 >
                   <X className="h-5 w-5" />
                 </Button>
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900">{selectedResource.title}</h2>
-                  <div className="flex items-center space-x-4 text-sm text-gray-600 mt-1">
+                  <h2 className="text-xl font-bold text-white">{selectedResource.title}</h2>
+                  <div className="flex items-center space-x-4 text-sm text-white/60 mt-1">
                     <span className="flex items-center">
                       <Clock className="h-4 w-4 mr-1" />
                       {selectedResource.readTime}
@@ -1089,16 +1094,16 @@ Start small, be consistent, and watch as gratitude becomes a natural part of how
                   variant="outline"
                   size="sm"
                   onClick={() => toggleBookmark(selectedResource.id)}
-                  className="flex items-center space-x-1"
+                  className="flex items-center space-x-1 border-white/30 text-white/80 hover:bg-white/20 hover:text-white"
                 >
-                  <Bookmark className={`h-4 w-4 ${bookmarkedResources.has(selectedResource.id) ? 'fill-current text-yellow-500' : ''}`} />
+                  <Bookmark className={`h-4 w-4 ${bookmarkedResources.has(selectedResource.id) ? 'fill-current text-yellow-400' : ''}`} />
                   <span>Bookmark</span>
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => shareResource(selectedResource)}
-                  className="flex items-center space-x-1"
+                  className="flex items-center space-x-1 border-white/30 text-white/80 hover:bg-white/20 hover:text-white"
                 >
                   <Share2 className="h-4 w-4" />
                   <span>Share</span>
@@ -1109,36 +1114,36 @@ Start small, be consistent, and watch as gratitude becomes a natural part of how
             {/* Reading Content */}
             <div className="overflow-y-auto max-h-[calc(90vh-120px)] p-6">
               <div className="prose prose-lg max-w-none">
-                <div className="whitespace-pre-wrap leading-relaxed text-gray-800">
+                <div className="whitespace-pre-wrap leading-relaxed text-white/90">
                   {selectedResource.content}
                 </div>
               </div>
 
               {/* Article Footer */}
-              <div className="mt-8 pt-8 border-t border-gray-200">
+              <div className="mt-8 pt-8 border-t border-white/20">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
-                    <span className="text-sm text-gray-600">Was this helpful?</span>
+                    <span className="text-sm text-white/70">Was this helpful?</span>
                     <div className="flex space-x-1">
                       {[1, 2, 3, 4, 5].map(star => (
-                        <Star key={star} className="h-5 w-5 text-gray-300 hover:text-yellow-400 cursor-pointer" />
+                        <Star key={star} className="h-5 w-5 text-white/30 hover:text-yellow-400 cursor-pointer transition-colors" />
                       ))}
                     </div>
                   </div>
                   <div className="flex space-x-2">
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" className="border-white/30 text-white/80 hover:bg-white/20 hover:text-white">
                       Previous Article
                     </Button>
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" className="border-white/30 text-white/80 hover:bg-white/20 hover:text-white">
                       Next Article
                     </Button>
                   </div>
                 </div>
 
                 <div className="mt-4 flex flex-wrap gap-2">
-                  <span className="text-sm text-gray-600">Tags:</span>
+                  <span className="text-sm text-white/70">Tags:</span>
                   {selectedResource.tags.map(tag => (
-                    <span key={tag} className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm hover:bg-blue-200 cursor-pointer transition-colors">
+                    <span key={tag} className="px-3 py-1 bg-blue-600/40 text-blue-200 rounded-full text-sm hover:bg-blue-600/60 cursor-pointer transition-colors border border-blue-500/50">
                       #{tag}
                     </span>
                   ))}

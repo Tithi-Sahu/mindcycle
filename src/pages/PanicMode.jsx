@@ -127,65 +127,67 @@ Respond empathetically and offer appropriate support techniques.`;
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50">
+    <div className="min-h-screen bg-gradient-to-br from-red-900 via-pink-800 to-red-900 relative overflow-hidden">
+      {/* Animated background elements with calming effect */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-red-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-pink-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+      <div className="absolute -bottom-8 left-20 w-96 h-96 bg-red-700 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+      
+      <div className="relative z-10">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b px-4 py-3">
+      <div className="bg-white/20 backdrop-blur-md border-b border-white/30 px-4 py-3">
         <div className="flex items-center justify-between max-w-4xl mx-auto">
           <div className="flex items-center space-x-3">
             <Button
               variant="ghost"
               size="sm"
               onClick={() => navigate('/dashboard')}
-              className="text-gray-600 hover:text-gray-800"
+              className="text-white/80 hover:text-white hover:bg-white/20 transition-all duration-300"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Safety
             </Button>
             <div className="flex items-center space-x-2">
-              <Heart className="h-5 w-5 text-red-500 animate-pulse" />
-              <h1 className="text-lg font-semibold text-gray-900">Panic Mode Support</h1>
+              <Heart className="h-5 w-5 text-red-300 animate-pulse" />
+              <h1 className="text-lg font-semibold text-white">Panic Mode Support</h1>
             </div>
           </div>
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-white/60">
             24/7 Support Available
           </div>
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto p-4">
+      <div className="max-w-4xl mx-auto p-4 relative z-10">
         {/* Quick Actions */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
           <Button
-            variant="outline"
             onClick={() => handleQuickAction('grounding')}
-            className="flex items-center space-x-2 h-auto py-3"
+            className="flex items-center space-x-2 h-auto py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white transition-all duration-300 transform hover:scale-105"
             disabled={isLoading}
           >
             <Eye className="h-4 w-4" />
             <span className="text-xs">Grounding</span>
           </Button>
           <Button
-            variant="outline"
             onClick={() => handleQuickAction('breathing')}
-            className="flex items-center space-x-2 h-auto py-3"
+            className="flex items-center space-x-2 h-auto py-3 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white transition-all duration-300 transform hover:scale-105"
             disabled={isLoading}
           >
             <Wind className="h-4 w-4" />
             <span className="text-xs">Breathing</span>
           </Button>
           <Button
-            variant="outline"
             onClick={() => handleQuickAction('affirmation')}
-            className="flex items-center space-x-2 h-auto py-3"
+            className="flex items-center space-x-2 h-auto py-3 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white transition-all duration-300 transform hover:scale-105"
             disabled={isLoading}
           >
             <Heart className="h-4 w-4" />
             <span className="text-xs">Affirmation</span>
           </Button>
           <Button
-            variant="outline"
             onClick={() => sendMessage("I'm feeling overwhelmed and need help")}
-            className="flex items-center space-x-2 h-auto py-3"
+            className="flex items-center space-x-2 h-auto py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white transition-all duration-300 transform hover:scale-105"
             disabled={isLoading}
           >
             <MessageCircle className="h-4 w-4" />
@@ -194,9 +196,9 @@ Respond empathetically and offer appropriate support techniques.`;
         </div>
 
         {/* Chat Messages */}
-        <Card className="h-96 mb-4">
+        <Card className="h-96 mb-4 bg-white/10 backdrop-blur-md border-white/20 hover:shadow-2xl transition-all duration-300">
           <CardHeader>
-            <CardTitle className="text-center text-red-600">Support Chat</CardTitle>
+            <CardTitle className="text-center text-red-200">Support Chat</CardTitle>
           </CardHeader>
           <CardContent className="flex-1 overflow-y-auto p-4 space-y-4">
             {messages.map((message) => (
@@ -205,10 +207,10 @@ Respond empathetically and offer appropriate support techniques.`;
                 className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                  className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg transition-all duration-300 ${
                     message.sender === 'user'
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-gray-100 text-gray-800'
+                      ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg'
+                      : 'bg-white/20 backdrop-blur-sm text-white/90 border border-white/30'
                   }`}
                 >
                   <p className="text-sm">{message.text}</p>
@@ -240,22 +242,23 @@ Respond empathetically and offer appropriate support techniques.`;
             onChange={(e) => setInputMessage(e.target.value)}
             placeholder="Type your message here... (or use quick actions above)"
             onKeyPress={(e) => e.key === 'Enter' && sendMessage(inputMessage)}
-            className="flex-1"
+            className="flex-1 bg-white/20 backdrop-blur-sm border-white/30 text-white placeholder-white/50 focus:bg-white/30 transition-all duration-300"
             disabled={isLoading}
           />
           <Button
             onClick={() => sendMessage(inputMessage)}
             disabled={isLoading || !inputMessage.trim()}
+            className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white transition-all duration-300 transform hover:scale-105"
           >
             <Send className="h-4 w-4" />
           </Button>
         </div>
 
         {/* Emergency Resources */}
-        <Card className="mt-6 bg-red-50 border-red-200">
+        <Card className="mt-6 bg-white/15 backdrop-blur-md border-white/30 hover:shadow-2xl transition-all duration-300">
           <CardContent className="p-4">
-            <h3 className="font-semibold text-red-800 mb-2">Emergency Resources</h3>
-            <div className="text-sm text-red-700 space-y-1">
+            <h3 className="font-semibold text-white/90 mb-2">Emergency Resources</h3>
+            <div className="text-sm text-white/80 space-y-1">
               <p>• If you're in immediate danger, call emergency services</p>
               <p>• National Suicide Prevention Lifeline: 988</p>
               <p>• Crisis Text Line: Text HOME to 741741</p>
@@ -263,6 +266,7 @@ Respond empathetically and offer appropriate support techniques.`;
             </div>
           </CardContent>
         </Card>
+      </div>
       </div>
     </div>
   );

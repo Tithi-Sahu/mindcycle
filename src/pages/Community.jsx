@@ -75,20 +75,25 @@ const Community = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-teal-900 via-blue-900 to-teal-900 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-teal-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+      <div className="absolute -bottom-8 left-20 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-4000"></div>
+      
       <Header />
       <PanicModeButton />
 
-      <main className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8">
+      <main className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8 relative z-10">
         <div className="px-4 py-6 sm:px-0">
-          <div className="flex justify-between items-center mb-8">
+          <div className="flex justify-between items-center mb-8 animate-fade-in">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Community Support</h1>
-              <p className="mt-2 text-gray-600">
+              <h1 className="text-4xl font-bold text-white">Community Support</h1>
+              <p className="mt-2 text-white/70 text-lg">
                 Connect anonymously with others on their wellness journey
               </p>
             </div>
-            <Button onClick={() => setShowNewPostForm(true)}>
+            <Button onClick={() => setShowNewPostForm(true)} className="bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 text-white transition-all duration-300 transform hover:scale-105">
               <Plus className="h-4 w-4 mr-2" />
               Share Your Story
             </Button>
@@ -96,8 +101,8 @@ const Community = () => {
 
           {/* New Post Form */}
           {showNewPostForm && (
-            <Card className="mb-8">
-              <CardHeader>
+            <Card className="mb-8 bg-white/10 backdrop-blur-md border-white/20">
+              <CardHeader className="bg-gradient-to-r from-teal-500/20 to-blue-500/20">
                 <CardTitle>Share Your Thoughts</CardTitle>
                 <CardDescription>
                   Your post will be anonymous. Help others by sharing your experiences.

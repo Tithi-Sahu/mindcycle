@@ -16,10 +16,21 @@ const SupportChat = () => {
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [hasApiKey, setHasApiKey] = useState(!!import.meta.env.VITE_GEMINI_API_KEY);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
-  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || 'your-api-key-here');
+  // initialize API client once
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  const genAIRef = useRef(null);
+
+  useEffect(() => {
+    if (apiKey) {
+      genAIRef.current = new GoogleGenerativeAI(apiKey);
+    } else {
+      console.warn('GEMINI_API_KEY not provided, support chat will not function');
+    }
+  }, [apiKey]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -41,11 +52,26 @@ const SupportChat = () => {
 
     setMessages(prev => [...prev, userMessage]);
     setInputMessage('');
-    setIsTyping(true);
+if (!hasApiKey) {
+        const keyError = {
+          id: messages.length + 1,
+          text: "Support chat is not configured. Please set VITE_GEMINI_API_KEY env variable.",
+          sender: 'bot',
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, keyError]);
+        return;
+      }
+      setIsTyping(true);
 
     try {
-      const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+      if (!genAIRef.current) {
+        throw new Error('No API key available for generative model');
+      }
+      const model = genAIRef.current.getGenerativeModel({ model: 'gemini-pro' });
 
+      // limit context size to last 3 messages and trim lengthy text
+      const recent = messages.slice(-3).map(m => `${m.sender}: ${m.text}`);
       const context = `You are a supportive, empathetic AI assistant for Mind Cycle, a mental health and productivity app. Your role is to:
       - Provide emotional support and encouragement
       - Help with goal setting and motivation
@@ -56,13 +82,13 @@ const SupportChat = () => {
       - Maintain a positive, supportive tone
       - Be honest about limitations (you're not a licensed therapist)
 
-      Previous conversation context: ${messages.slice(-5).map(m => `${m.sender}: ${m.text}`).join('\n')}
+      Previous conversation context: ${recent.join('\n')}
 
       User message: ${message}`;
 
       const result = await model.generateContent(context);
       const response = await result.response;
-      const botMessage = response.text();
+      const botMessage = response.text().slice(0, 1000); // safety cap
 
       const botResponse = {
         id: messages.length + 2,
@@ -195,9 +221,9 @@ const SupportChat = () => {
                     type="text"
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
-                    placeholder="Type your message..."
+                    placeholder={hasApiKey ? "Type your message..." : "API key missing"}
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    disabled={isTyping}
+                    disabled={isTyping || !hasApiKey}
                   />
                   <Button
                     type="submit"
